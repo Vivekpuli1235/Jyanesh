@@ -3,175 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register - TEAM RAW by Sidd</title>
+  <title>TEAM RAW | Register</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212;
+      font-family: Arial, sans-serif;
+      background-color: #0d0d0d;
       color: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
       margin: 0;
+      padding: 0;
     }
-
-    .container {
-      background: #1e1e1e;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
-      width: 420px;
-    }
-
-    h1 {
+    header {
+      background-color: #b30000;
+      padding: 20px;
       text-align: center;
-      color: #ff1a1a;
-      margin-bottom: 10px;
-      font-size: 26px;
-      letter-spacing: 2px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
     }
-
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #b30000;
+    }
     h2 {
       text-align: center;
-      color: #ff3b3b;
-      margin-bottom: 20px;
-      font-size: 20px;
+      color: #fff;
     }
-
-    label {
-      display: block;
-      margin-top: 10px;
-      font-size: 14px;
-      color: #ff6666;
-    }
-
     input, select, textarea {
       width: 100%;
       padding: 10px;
-      margin-top: 5px;
-      border-radius: 8px;
-      border: 1px solid #ff3b3b;
-      background: #2a2a2a;
-      color: #fff;
+      margin: 8px 0;
+      border-radius: 5px;
+      border: none;
       outline: none;
-      transition: 0.3s;
+      background: #262626;
+      color: white;
     }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: #ff6666;
-      box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
-    }
-
     button {
-      margin-top: 20px;
       width: 100%;
       padding: 12px;
-      background: linear-gradient(45deg, #ff1a1a, #b30000);
+      background-color: #b30000;
       color: white;
       border: none;
-      border-radius: 8px;
-      font-size: 16px;
+      border-radius: 5px;
       cursor: pointer;
-      transition: 0.3s;
+      font-size: 1rem;
     }
-
     button:hover {
-      background: linear-gradient(45deg, #b30000, #ff1a1a);
-      box-shadow: 0 0 12px rgba(255, 0, 0, 0.7);
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 15px;
-      font-size: 13px;
-      color: #888;
+      background-color: #e60000;
     }
   </style>
 </head>
 <body>
+  <header>TEAM RAW – Client Registration</header>
+
   <div class="container">
-    <h1>TEAM RAW by Sidd</h1>
-    <h2>Register Client</h2>
+    <h2>Register Here</h2>
     <form id="registerForm">
-      <label for="fullname">Full Name</label>
-      <input type="text" id="fullname" required>
-
-      <label for="age">Age</label>
-      <input type="number" id="age" required>
-
-      <label for="gender">Gender</label>
+      <input type="text" id="fullname" placeholder="Full Name" required>
+      <input type="number" id="age" placeholder="Age" required>
       <select id="gender" required>
-        <option value="">Select</option>
+        <option value="">Select Gender</option>
         <option>Male</option>
         <option>Female</option>
         <option>Other</option>
       </select>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="text" id="phone" placeholder="Phone" required>
+      <input type="text" id="city" placeholder="City" required>
+      <input type="text" id="height" placeholder="Height (cm)">
+      <input type="text" id="weight" placeholder="Weight (kg)">
 
-      <label for="email">Email</label>
-      <input type="email" id="email" required>
-
-      <label for="phone">Phone</label>
-      <input type="text" id="phone" required>
-
-      <label for="city">City</label>
-      <input type="text" id="city" required>
-
-      <label for="height">Height (cm)</label>
-      <input type="number" id="height" required>
-
-      <label for="weight">Weight (kg)</label>
-      <input type="number" id="weight" required>
-
-      <label for="activity">Activity Level</label>
+      <label for="activity"></label>
       <select id="activity" required>
-        <option value="">Select</option>
+        <option value="">Activity Level</option>
         <option>Sedentary</option>
         <option>Moderate</option>
         <option>Active</option>
       </select>
 
-      <label for="goal">Fitness Goal</label>
+       <label for="goal"></label>
       <select id="goal" required>
-        <option value="">Select</option>
+        <option value="">Fitness Goal</option>
         <option>Weight Loss</option>
         <option>Muscle Gain</option>
         <option>Maintain</option>
       </select>
 
-      <label for="medical">Medical Conditions</label>
-      <textarea id="medical"></textarea>
-
-      <label for="mode">Preferred Mode</label>
-      <select id="mode" required>
-        <option value="">Select</option>
+      <textarea id="medical" placeholder="Medical Conditions"></textarea>
+      <select id="mode">
+        <option value="">Mode of Training</option>
         <option>Online</option>
         <option>Offline</option>
       </select>
-
       <button type="submit">Register</button>
     </form>
-    <div class="footer">Powered by Firebase</div>
   </div>
 
-  <!-- Firebase Script -->
+  <!-- Firebase SDK -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
+    // Firebase Config (same as your admin.html)
     const firebaseConfig = {
-  apiKey: "AIzaSyAgjQzG2w9lkx8S1OVIR3e-MNxZLLMN1rw",
-  authDomain: "clientportal-ef181.firebaseapp.com",
-  databaseURL: "https://clientportal-ef181-default-rtdb.firebaseio.com",
-  projectId: "clientportal-ef181",
-  storageBucket: "clientportal-ef181.appspot.com",   // ✅ fixed here
-  messagingSenderId: "427314875945",
-  appId: "1:427314875945:web:17eb6479334bcb024c1638"
-};
+      apiKey: "AIzaSyAgjQzG2w9lkx8S1OVIR3e-MNxZLLMN1rw",
+      authDomain: "clientportal-ef181.firebaseapp.com",
+      projectId: "clientportal-ef181",
+      storageBucket: "clientportal-ef181.appspot.com",
+      messagingSenderId: "427314875945",
+      appId: "1:427314875945:web:17eb6479334bcb024c1638"
+    };
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
+    // Handle form submit
     document.getElementById("registerForm").addEventListener("submit", async (e) => {
       e.preventDefault();
 
@@ -190,11 +140,11 @@
           medical: document.getElementById("medical").value,
           mode: document.getElementById("mode").value
         });
-        alert("✅ Client registered successfully!");
-        e.target.reset();
-      } catch (err) {
-        console.error("Error adding document: ", err);
-        alert("❌ Error saving data");
+
+        alert("Registration successful!");
+        document.getElementById("registerForm").reset();
+      } catch (error) {
+        alert("Error: " + error.message);
       }
     });
   </script>
