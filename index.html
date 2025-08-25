@@ -1,48 +1,60 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+  // ✅ Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAgjQzG2w9lkx8S1OCIR3e-MNxILMN1rw",
+    authDomain: "clientportal-ef181.firebaseapp.com",
+    projectId: "clientportal-ef181",
+    storageBucket: "clientportal-ef181.appspot.com",
+    messagingSenderId: "427314875945",
+    appId: "1:427314875945:web:17eb6479334bcb024c1638",
+    databaseURL: "https://clientportal-ef181-default-rtdb.firebaseio.com"   <!-- ✅ required for Realtime DB -->
+  };
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyAgjQzG2w9lkx8S1OCIR3e-MNxILMN1rw",
-  authDomain: "clientportal-ef181.firebase.com",
-  projectId: "clientportal-ef181",
-  storageBucket: "clientportal-ef181.firebasestorage.app",
-  messagingSenderId: "427314875945",
-  appId: "1:427314875945:web:17eb6479334bcb024c1638"
-};
+  // ✅ Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);;
-
-  // Handle form submission
-  document.getElementById("registerForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const client = {
-      fullname: document.getElementById("fullname").value,
-      age: document.getElementById("age").value,
-      gender: document.getElementById("gender").value,
-      height: document.getElementById("height").value,
-      weight: document.getElementById("weight").value,
-      email: document.getElementById("email").value,
-      phone: document.getElementById("phone").value,
-      city: document.getElementById("city").value,
-      activity: document.getElementById("activity").value,
-      goal: document.getElementById("goal").value,
-      medical: document.getElementById("medical").value,
-      mode: document.getElementById("mode").value
-    };
+  // ✅ Save client data
+  async function saveClient() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const gender = document.getElementById("gender").value;
+    const height = document.getElementById("height").value;
+    const weight = document.getElementById("weight").value;
+    const phone = document.getElementById("phone").value;
+    const city = document.getElementById("city").value;
+    const activity = document.getElementById("activity").value;
+    const goal = document.getElementById("goal").value;
+    const medical = document.getElementById("medical").value;
+    const mode = document.getElementById("mode").value;
 
     try {
-      await addDoc(collection(db, "clients"), client);
-      alert("Client Registered Successfully!");
-      e.target.reset();
+      await push(ref(db, "clients"), {
+        name,
+        email,
+        gender,
+        height,
+        weight,
+        phone,
+        city,
+        activity,
+        goal,
+        medical,
+        mode
+      });
+      alert("Client registered successfully!");
     } catch (error) {
-      console.error("Error adding client: ", error);
+      console.error("Error saving client: ", error);
     }
+  }
+
+  // ✅ Example: hook this function to a form
+  document.getElementById("registerForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    saveClient();
+    e.target.reset();
   });
 </script>
-
