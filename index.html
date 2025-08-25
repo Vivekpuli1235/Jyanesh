@@ -160,13 +160,14 @@
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyAgjQzG2w9lkx8S1OCIR3e-MNxILMN1rw",
-      authDomain: "clientportal-ef181.firebaseapp.com",
-      projectId: "clientportal-ef181",
-      storageBucket: "clientportal-ef181.appspot.com",
-      messagingSenderId: "427314875945",
-      appId: "1:427314875945:web:17eb6479334bcb024c1638"
-    };
+  apiKey: "AIzaSyAgjQzG2w9lkx8S1OVIR3e-MNxZLLMN1rw",
+  authDomain: "clientportal-ef181.firebaseapp.com",
+  databaseURL: "https://clientportal-ef181-default-rtdb.firebaseio.com",
+  projectId: "clientportal-ef181",
+  storageBucket: "clientportal-ef181.appspot.com",   // ✅ fixed here
+  messagingSenderId: "427314875945",
+  appId: "1:427314875945:web:17eb6479334bcb024c1638"
+};
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
