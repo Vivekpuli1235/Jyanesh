@@ -1,60 +1,201 @@
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-  import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-
-  // ✅ Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyAgjQzG2w9lkx8S1OCIR3e-MNxILMN1rw",
-    authDomain: "clientportal-ef181.firebaseapp.com",
-    projectId: "clientportal-ef181",
-    storageBucket: "clientportal-ef181.appspot.com",
-    messagingSenderId: "427314875945",
-    appId: "1:427314875945:web:17eb6479334bcb024c1638",
-    databaseURL: "https://clientportal-ef181-default-rtdb.firebaseio.com"   <!-- ✅ required for Realtime DB -->
-  };
-
-  // ✅ Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-
-  // ✅ Save client data
-  async function saveClient() {
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const gender = document.getElementById("gender").value;
-    const height = document.getElementById("height").value;
-    const weight = document.getElementById("weight").value;
-    const phone = document.getElementById("phone").value;
-    const city = document.getElementById("city").value;
-    const activity = document.getElementById("activity").value;
-    const goal = document.getElementById("goal").value;
-    const medical = document.getElementById("medical").value;
-    const mode = document.getElementById("mode").value;
-
-    try {
-      await push(ref(db, "clients"), {
-        name,
-        email,
-        gender,
-        height,
-        weight,
-        phone,
-        city,
-        activity,
-        goal,
-        medical,
-        mode
-      });
-      alert("Client registered successfully!");
-    } catch (error) {
-      console.error("Error saving client: ", error);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - TEAM RAW by Sidd</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
     }
-  }
 
-  // ✅ Example: hook this function to a form
-  document.getElementById("registerForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    saveClient();
-    e.target.reset();
-  });
-</script>
+    .container {
+      background: #1e1e1e;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
+      width: 420px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff1a1a;
+      margin-bottom: 10px;
+      font-size: 26px;
+      letter-spacing: 2px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ff3b3b;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #ff6666;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ff3b3b;
+      background: #2a2a2a;
+      color: #fff;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #ff6666;
+      box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(45deg, #ff1a1a, #b30000);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, #b30000, #ff1a1a);
+      box-shadow: 0 0 12px rgba(255, 0, 0, 0.7);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 13px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>TEAM RAW by Sidd</h1>
+    <h2>Register Client</h2>
+    <form id="registerForm">
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" required>
+
+      <label for="age">Age</label>
+      <input type="number" id="age" required>
+
+      <label for="gender">Gender</label>
+      <select id="gender" required>
+        <option value="">Select</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" required>
+
+      <label for="city">City</label>
+      <input type="text" id="city" required>
+
+      <label for="height">Height (cm)</label>
+      <input type="number" id="height" required>
+
+      <label for="weight">Weight (kg)</label>
+      <input type="number" id="weight" required>
+
+      <label for="activity">Activity Level</label>
+      <select id="activity" required>
+        <option value="">Select</option>
+        <option>Sedentary</option>
+        <option>Moderate</option>
+        <option>Active</option>
+      </select>
+
+      <label for="goal">Fitness Goal</label>
+      <select id="goal" required>
+        <option value="">Select</option>
+        <option>Weight Loss</option>
+        <option>Muscle Gain</option>
+        <option>Maintain</option>
+      </select>
+
+      <label for="medical">Medical Conditions</label>
+      <textarea id="medical"></textarea>
+
+      <label for="mode">Preferred Mode</label>
+      <select id="mode" required>
+        <option value="">Select</option>
+        <option>Online</option>
+        <option>Offline</option>
+      </select>
+
+      <button type="submit">Register</button>
+    </form>
+    <div class="footer">Powered by Firebase</div>
+  </div>
+
+  <!-- Firebase Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAgjQzG2w9lkx8S1OCIR3e-MNxILMN1rw",
+      authDomain: "clientportal-ef181.firebaseapp.com",
+      projectId: "clientportal-ef181",
+      storageBucket: "clientportal-ef181.appspot.com",
+      messagingSenderId: "427314875945",
+      appId: "1:427314875945:web:17eb6479334bcb024c1638"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    document.getElementById("registerForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      try {
+        await addDoc(collection(db, "clients"), {
+          fullname: document.getElementById("fullname").value,
+          age: document.getElementById("age").value,
+          gender: document.getElementById("gender").value,
+          email: document.getElementById("email").value,
+          phone: document.getElementById("phone").value,
+          city: document.getElementById("city").value,
+          height: document.getElementById("height").value,
+          weight: document.getElementById("weight").value,
+          activity: document.getElementById("activity").value,
+          goal: document.getElementById("goal").value,
+          medical: document.getElementById("medical").value,
+          mode: document.getElementById("mode").value
+        });
+        alert("✅ Client registered successfully!");
+        e.target.reset();
+      } catch (err) {
+        console.error("Error adding document: ", err);
+        alert("❌ Error saving data");
+      }
+    });
+  </script>
+</body>
+</html>
