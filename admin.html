@@ -1,20 +1,23 @@
 <script type="module">
+  // Import Firebase SDKs
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
   import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+  // Firebase configuration (check authDomain & storageBucket in Firebase console!)
+  const firebaseConfig = {
+    apiKey: "AIzaSyAgjQzG2w9lkx8S1OCIR3e-MNxILMN1rw",
+    authDomain: "clientportal-ef181.firebaseapp.com",   // ✅ fixed
+    projectId: "clientportal-ef181",
+    storageBucket: "clientportal-ef181.appspot.com",   // ✅ fixed
+    messagingSenderId: "427314875945",
+    appId: "1:427314875945:web:17eb6479334bcb024c1638"
+  };
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyAgjQzG2w9lkx8S1OCIR3e-MNxILMN1rw",
-  authDomain: "clientportal-ef181.firebase.com",
-  projectId: "clientportal-ef181",
-  storageBucket: "clientportal-ef181.firebasestorage.app",
-  messagingSenderId: "427314875945",
-  appId: "1:427314875945:web:17eb6479334bcb024c1638"
-};
+  // Initialize Firebase + Firestore
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
+  // Load clients into table
   async function loadClients() {
     const querySnapshot = await getDocs(collection(db, "clients"));
     const table = document.getElementById("clientTable");
@@ -22,16 +25,17 @@ const firebaseConfig = {
     querySnapshot.forEach((doc) => {
       const data = doc.data();
       const row = `<tr>
-        <td>${data.fullname}</td>
-        <td>${data.age}</td>
-        <td>${data.gender}</td>
-        <td>${data.email}</td>
-        <td>${data.phone}</td>
-        <td>${data.city}</td>
+        <td>${data.fullname || ""}</td>
+        <td>${data.age || ""}</td>
+        <td>${data.gender || ""}</td>
+        <td>${data.email || ""}</td>
+        <td>${data.phone || ""}</td>
+        <td>${data.city || ""}</td>
       </tr>`;
       table.innerHTML += row;
     });
   }
 
-  loadClients();
+  // Run after DOM is loaded
+  window.onload = loadClients;
 </script>
